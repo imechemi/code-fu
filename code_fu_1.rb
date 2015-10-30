@@ -1,29 +1,15 @@
 # Print the second highest element within a list of numbers input from the command line
 
-ele = []
-ARGV.each { |x| ele << x.to_i }
+elements = ARGV.map { |x| x.to_i }
+second_largest, largest = elements[0], elements[0]
 
-larg = ele[0]
-sec_larg = 0
-index_of_largest = 0
-
-for i in 0...(ele.size-1)
-  puts i
-  if ele[i] > larg
-    larg = ele[i]
-    index_of_largest = i
-  end
+elements.each do |ele|
+  second_largest = ele if ele < second_largest
+  largest = ele if ele > largest
 end
 
-larg = ele[0]
-
-for i in 0..(ele.size-1)
-  if ele[i] > larg && i != index_of_largest
-    sec_larg = ele[i]
-  end
-end
-
-puts "Second highest element is: #{sec_larg}"
+elements.each { |ele| second_largest = ele if ele > second_largest && ele != largest }
+puts "Second Largest element is #{second_largest}"
 
 
 
