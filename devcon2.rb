@@ -11,7 +11,7 @@
 str = gets.chomp()
 numbers = str.split(" ").map{|x| x.to_i}
 @num = numbers
-def haha(start)
+def replace_consectives(start)
   for i in (start+1)..@num.size-1
     if @num[i] % 10 == 0
       break
@@ -23,7 +23,7 @@ end
 
 for i in 0..@num.size-1
   if @num[i] % 10 == 0
-    haha(i)
+    replace_consectives(i)
   end
 end
 
