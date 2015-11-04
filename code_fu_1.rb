@@ -9,7 +9,8 @@ elements.each do |ele|
 end
 
 elements.each { |ele| second_largest = ele if ele > second_largest && ele != largest }
-puts "Second Largest element is #{second_largest}"
+puts "Second Largest element is #{second_largest}" if second_largest != largest
+puts "Second largest doesn't exist!!" if second_largest == largest
 
 
 
