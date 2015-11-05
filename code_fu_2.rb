@@ -1,45 +1,58 @@
 # ‘Print the neighbors of an element in a 3x3 integer matrix, given as input from the command line’
 
-a = [[],[],[]]
+print "Enter row size (>3) :"
+row = gets.chomp.to_i
+print "Enter column size (>3) : "
+col = gets.chomp.to_i
 
-for i in 0..2
-  for j in 0..2
+a = []
+col.times { a << [] }
+
+for i in 0..row-1
+  for j in 0..col-1
     print "Enter a[#{i}][#{j}] = "
     a[i][j] = gets.chomp.to_i
   end
 end
 
 print "The matrix is: \n"
-for i in 0..2
-  for j in 0..2
-    print " #{a[i][j]}"
+for i in 0..row-1
+  for j in 0..col-1
+    print "   #{a[i][j]}"
   end
   print "\n"
 end
 
-neb = []
-print "Choose an element: "
-ele = gets.chomp.to_i
-for i in 0..2
-  for j in 0..2
-    if ele == a[i][j]
-      neb << a[i-1][j-1] if (i-1 >= 0 and j-1 >= 0) # 00
-      neb << a[i-1][j] if (i-1 >= 0) # 01
-      neb << a[i-1][j+1] if (i-1 >= 0 and j+1 < 3) # 02
-      neb << a[i][j-1] if (j-1 >= 0) # 10
-      neb << a[i][j+1] if (j+1 < 3) # 12
-      neb << a[i+1][j-1] if (i+1 < 3 and j-1 >= 0) # 20
-      neb << a[i+1][j] if (i+1 < 3) # 21
-      neb << a[i+1][j+1] if (i+1 < 3 and j+1 < 3) # 22
-      flag = 1
-      break
+# 00 01 02
+# 11 12 13
+# 21 22 23
+
+ch = 'y'
+while ch === 'y'
+  print "Choose an element: "
+  ele = gets.chomp.to_i
+  neb, flag = [], 0
+  for i in 0..row-1
+    for j in 0..col-1
+      if ele == a[i][j]
+        neb << a[i-1][j-1] if (i-1 >= 0 and j-1 >= 0) # 00
+        neb << a[i-1][j] if (i-1 >= 0) # 01
+        neb << a[i-1][j+1] if (i-1 >= 0 and j+1 < col) # 02
+        neb << a[i][j-1] if (j-1 >= 0) # 10
+        neb << a[i][j+1] if (j+1 < col) # 12
+        neb << a[i+1][j-1] if (i+1 < col and j-1 >= 0) # 20
+        neb << a[i+1][j] if (i+1 < col) # 21
+        neb << a[i+1][j+1] if (i+1 < col and j+1 < col) # 22
+        flag = 1
+        break
+      end
     end
+    break if flag == 1  # exit when ele is found
   end
-  break if flag == 1  # exit when ele is found
+  puts "Neighbors: #{neb}"
+  print "Find another one? [y/n]: "
+  ch = gets.chomp.downcase
 end
-
-puts "Neighbors: #{neb}"
-
 
 # 00 01 02
 # 10 11 12
